@@ -20,8 +20,7 @@
 
         <!-- Load external JavaScript -->
         <script>
-    // 1. DATA KATA DAN PETUNJUK
-    const wordsDataset = [
+const wordsDataset = [
         { correct: "MODEM", hint: "Alat untuk menyambungkan internet" },
         { correct: "MOUSE", hint: "Perangkat keras untuk menggerakkan kursor" },
         { correct: "CODING", hint: "Aktivitas menulis kode program" },
@@ -32,69 +31,48 @@
         { correct: "ALGORITMA", hint: "Langkah-langkah logis penyelesaian masalah" }
     ];
 
-    let currentWordObj = {}; // Menyimpan objek kata yang sedang aktif
-    let score = 0;           // Menyimpan skor pemain
+    let currentWordObj = {};
+    let score = 0;
 
-    // 2. FUNGSI UNTUK MENGACAK HURUF
     function scramble(word) {
         let letters = word.split('');
         for (let i = letters.length - 1; i > 0; i--) {
             let j = Math.floor(Math.random() * (i + 1));
-            // Menukar posisi huruf secara acak
             [letters[i], letters[j]] = [letters[j], letters[i]];
         }
-        
-        // Proteksi: Jika hasil acakan mirip kata asli, lakukan acak ulang
         if (letters.join('') === word) {
             return scramble(word);
         }
         return letters.join('');
     }
 
-    // 3. FUNGSI UNTUK MENAMPILKAN SOAL BARU
+     Aurora
     function nextWord() {
-        // Memilih satu soal secara acak dari database kata
         const randomIndex = Math.floor(Math.random() * wordsDataset.length);
         currentWordObj = wordsDataset[randomIndex];
-        
-        // Mengacak kata yang terpilih dan menampilkannya ke layar HTML
         document.getElementById("scrambledWord").innerText = scramble(currentWordObj.correct);
-        
-        // Menampilkan petunjuk soal ke layar HTML
         document.getElementById("hintText").innerText = "Petunjuk: " + currentWordObj.hint;
-        
-        // Mengosongkan kembali kolom input jawaban dan pesan teks
         document.getElementById("userInput").value = "";
         document.getElementById("message").innerText = "";
     }
 
-    // 4. FUNGSI UNTUK MEMERIKSA JAWABAN
     function checkAnswer() {
-        // Mengambil teks input, menghapus spasi ujung, dan diubah ke Huruf Kapital semua
         const userAns = document.getElementById("userInput").value.trim().toUpperCase();
         const msgElement = document.getElementById("message");
         
-        // Kondisi jika jawaban BENAR
         if (userAns === currentWordObj.correct) {
             msgElement.innerText = "🎉 Benar Sekali!";
-            msgElement.style.color = "#2ecc71"; // Mengubah teks pesan menjadi hijau
-            
-            // Menambah skor +10 dan memperbaruinya di layar HTML
+            msgElement.style.color = "#2ecc71";
             score += 10;
             document.getElementById("scoreValue").innerText = score;
-            
-            // Menunggu 1.5 detik (1500ms) lalu otomatis mengganti ke kata berikutnya
             setTimeout(nextWord, 1500);
-        } 
-        // Kondisi jika jawaban SALAH
-        else {
+        } else {
             msgElement.innerText = "❌ Salah, coba lagi ya!";
-            msgElement.style.color = "#e74c3c"; // Mengubah teks pesan menjadi merah
+            msgElement.style.color = "#e74c3c";
         }
     }
 
-    // 5. MENJALANKAN GAME SECARA OTOMATIS SAAT WEBSITE PERTAMA KALI DIBUKA
-    window.onload = nextWord;
+    window.onload = nextWord;        
         </script>
         
     </body>
