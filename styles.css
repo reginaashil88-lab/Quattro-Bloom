@@ -15,15 +15,14 @@
     box-sizing: border-box;
 }
 
-body {background-color: papayawhip;}
-p {font: 100;}
-p2 {text-align: left;}
-p2 {font-size: small;}
-p2 {color: pink ;}
-ul {list-style-type: none;
-background-color: powderblue;
-border: 5px;
-border-color: bisque
+body {
+    font-family: 'Quicksand', sans-serif;
+    /* Kombinasi warna pink kelopak bunga yang jelas dan dominan */
+    background: linear-gradient(135deg, #ffccd5 0%, #ffb7c5 50%, #ffa6b9 100%);
+    color: #4a4a4a;
+    min-height: 100vh;
+    overflow-x: hidden;
+    position: relative;
 }
 
 /* Animasi pergerakan warna background */
