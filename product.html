@@ -19,60 +19,7 @@
 
 
         <!-- Load external JavaScript -->
-        <script>
-const wordsDataset = [
-        { correct: "MODEM", hint: "Alat untuk menyambungkan internet" },
-        { correct: "MOUSE", hint: "Perangkat keras untuk menggerakkan kursor" },
-        { correct: "CODING", hint: "Aktivitas menulis kode program" },
-        { correct: "DATA", hint: "Kumpulan informasi mentah" },
-        { correct: "FOLDER", hint: "Tempat menyimpan file agar rapi" },
-        { correct: "HARDDISK", hint: "Media penyimpanan data utama di komputer" },
-        { correct: "MONITOR", hint: "Layar yang menampilkan visual komputer" },
-        { correct: "ALGORITMA", hint: "Langkah-langkah logis penyelesaian masalah" }
-    ];
-
-    let currentWordObj = {};
-    let score = 0;
-
-    function scramble(word) {
-        let letters = word.split('');
-        for (let i = letters.length - 1; i > 0; i--) {
-            let j = Math.floor(Math.random() * (i + 1));
-            [letters[i], letters[j]] = [letters[j], letters[i]];
-        }
-        if (letters.join('') === word) {
-            return scramble(word);
-        }
-        return letters.join('');
-    }
-
-     Aurora
-    function nextWord() {
-        const randomIndex = Math.floor(Math.random() * wordsDataset.length);
-        currentWordObj = wordsDataset[randomIndex];
-        document.getElementById("scrambledWord").innerText = scramble(currentWordObj.correct);
-        document.getElementById("hintText").innerText = "Petunjuk: " + currentWordObj.hint;
-        document.getElementById("userInput").value = "";
-        document.getElementById("message").innerText = "";
-    }
-
-    function checkAnswer() {
-        const userAns = document.getElementById("userInput").value.trim().toUpperCase();
-        const msgElement = document.getElementById("message");
-        
-        if (userAns === currentWordObj.correct) {
-            msgElement.innerText = "🎉 Benar Sekali!";
-            msgElement.style.color = "#2ecc71";
-            score += 10;
-            document.getElementById("scoreValue").innerText = score;
-            setTimeout(nextWord, 1500);
-        } else {
-            msgElement.innerText = "❌ Salah, coba lagi ya!";
-            msgElement.style.color = "#e74c3c";
-        }
-    }
-
-    window.onload = nextWord;        
+      <script href="styles.css">>        
         </script>
         
     </body>
