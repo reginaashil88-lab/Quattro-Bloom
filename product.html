@@ -73,4 +73,35 @@
         window.onload = initGame;
     </script>
 </body>
+    <script>
+    function createPetal() {
+        const petal = document.createElement('div');
+        petal.classList.add('bloom-petal');
+        
+        // Mengatur ukuran kelopak secara acak (antara 10px sampai 22px)
+        const size = Math.random() * 12 + 10 + 'px';
+        petal.style.width = size;
+        petal.style.height = size;
+        
+        // Mengatur posisi horizontal acak saat muncul
+        petal.style.left = Math.random() * window.innerWidth + 'px';
+        
+        // Mengatur durasi jatuh acak agar terlihat alami (antara 5 sampai 10 detik)
+        petal.style.animationDuration = Math.random() * 5 + 5 + 's';
+        
+        // Variasi warna pink kelopak bunga secara acak
+        const bloomColors = ['#ffb7c5', '#ffe4e1', '#ffd1dc', '#ffc0cb'];
+        petal.style.backgroundColor = bloomColors[Math.floor(Math.random() * bloomColors.length)];
+
+        document.body.appendChild(petal);
+
+        // Menghapus elemen kelopak setelah animasi jatuh selesai agar website tidak berat
+        setTimeout(() => {
+            petal.remove();
+        }, 10000);
+    }
+
+    // Memunculkan kelopak bunga baru setiap 400 milidetik
+    setInterval(createPetal, 400);
+</script>
 </html>
