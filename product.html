@@ -1,96 +1,76 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Quattro Bloom : PRODUCT</title>
-  <link rel="stylesheet" href="style.css">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Playpen+Sans&family=DynaPuff:wght@400..700&family=Delius&display=swap" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blossom | Word Scramble Game</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <nav class="navbar">
+        <a href="index.html" class="logo">Blossom.</a>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="design.html">Design</a></li>
+            <li><a href="product.html">Product</a></li>
+            <li><a href="about.html">About Us</a></li>
+        </ul>
+    </nav>
 
-  <div class="navbar-container">
-    <div class="navbar-left">
-      <ul class="ul-navbar-container">
-        <li class="li-navbar-brand">Quattro Bloom</li>
-      </ul>
+    <div class="container">
+        <h1>Word Scramble</h1>
+        <p>Uji wawasan informatikamu dengan menyusun kembali huruf-huruf acak di bawah ini menjadi istilah yang tepat!</p>
+
+        <div class="game-box">
+            <div id="scrambled-word">...</div>
+            <p id="hint" style="font-style: italic; font-size: 15px; color: #777;">Petunjuk permainan akan muncul di sini</p>
+        </div>
+
+        <input type="text" id="user-guess" placeholder="Ketik susunan kata di sini...">
+        <br>
+        <button class="btn" onclick="checkAnswer()">Periksa Jawaban</button>
+        <button class="btn" onclick="initGame()" style="background: var(--pink-blossom); color: var(--deep-cherry);">Ganti Kata</button>
+        
+        <p id="message" style="margin-top: 25px; font-weight: bold; font-size: 20px;"></p>
     </div>
-    <div class="navbar-right">
-      <ul class="ul-navbar-container">
-        <li class="li-navbar-container"><a href="index.html">Home</a></li>
-        <li class="li-navbar-container"><a href="product.html">Product</a></li>
-        <li class="li-navbar-container"><a href="desain.html">Design</a></li>
-        <li class="li-navbar-container"><a href="about.html">About Us</a></li>
-      </ul>
-    </div>
-  </div>
 
-  <div class="container">
-    <h1>Word Scramble: Informatika 💻</h1>
-    <p>Susun kembali huruf-huruf di bawah ini menjadi istilah informatika yang benar!</p>
-    
-    <div style="background: rgba(0,0,0,0.2); padding: 15px; border-radius: 10px; margin-bottom: 20px;">
-        <h2 id="scrambledWord" style="letter-spacing: 5px; color: #ff00ff; font-size: 32px;">KODIGN</h2>
-        <small id="wordHint" style="color: #aaa; font-style: italic;">Petunjuk: Menulis baris kode program</small>
-    </div>
+    <script>
+        const words = [
+            { word: "DATABASE", scramble: "TEBASADA", hint: "Sistem penyimpanan data digital yang terstruktur." },
+            { word: "NETWORK", scramble: "KROWTEN", hint: "Jaringan koneksi antar perangkat komputer." },
+            { word: "PYTHON", scramble: "NOHYTP", hint: "Salah satu bahasa pemrograman populer bersimbol ular." },
+            { word: "SECURITY", scramble: "YTIRECES", hint: "Aspek keamanan pada sistem atau data komputer." },
+            { word: "BROWSER", scramble: "WESBROR", hint: "Perangkat lunak yang digunakan untuk menjelajahi website." }
+        ];
 
-    <input type="text" id="userInput" placeholder="Ketik jawabanmu di sini...">
-    <br>
-    <button onclick="checkAnswer()">Periksa Jawaban</button>
-    <button onclick="nextWord()" style="background: #0099ff; color: white;">Kata Lain</button>
-    
-    <div id="result"></div>
-  </div>
+        let currentWord = {};
 
-  <script>
-    // Daftar kata bertema informatika
-    const wordsDatabase = [
-        { correct: "CODING", scrambled: "KODIGN", hint: "Proses menulis instruksi untuk komputer (Bahasa Inggris)." },
-        { correct: "ALGORITMA", scrambled: "AMTIROLGA", hint: "Langkah-langkah logis dan berurutan untuk menyelesaikan masalah." },
-        { correct: "INTERNET", scrambled: "TENRETNI", hint: "Jaringan global yang menghubungkan komputer di seluruh dunia." },
-        { correct: "SOFTWARE", scrambled: "ERAWFTOS", hint: "Perangkat lunak atau aplikasi komputer." },
-        { correct: "HARDWARE", scrambled: "ERAWDRHA", hint: "Komponen fisik penyusun komputer." }
-    ];
-
-    let currentWordIndex = 0;
-
-    function loadWord() {
-        const currentData = wordsDatabase[currentWordIndex];
-        document.getElementById("scrambledWord").innerText = currentData.scrambled;
-        document.getElementById("wordHint").innerText = `Petunjuk: ${currentData.hint}`;
-        document.getElementById("userInput").value = "";
-        document.getElementById("result").innerText = "";
-        document.getElementById("result").className = "";
-    }
-
-    function checkAnswer() {
-        const userAnswer = document.getElementById("userInput").value.trim().toUpperCase();
-        const correctAnswer = wordsDatabase[currentWordIndex].correct;
-        const resultDiv = document.getElementById("result");
-
-        if (userAnswer === correctAnswer) {
-            resultDiv.innerHTML = "🎉 Benar! Kerja bagus!";
-            resultDiv.className = "correct";
-        } else if (userAnswer === "") {
-            resultDiv.innerHTML = "Isi jawabanmu terlebih dahulu!";
-            resultDiv.className = "";
-        } else {
-            resultDiv.innerHTML = "❌ Salah! Coba tebak lagi ya.";
-            resultDiv.className = "wrong";
+        function initGame() {
+            const randomIndex = Math.floor(Math.random() * words.length);
+            currentWord = words[randomIndex];
+            document.getElementById("scrambled-word").innerText = currentWord.scramble;
+            document.getElementById("hint").innerText = "Petunjuk: " + currentWord.hint;
+            document.getElementById("message").innerText = "";
+            document.getElementById("user-guess").value = "";
         }
-    }
 
-    function nextWord() {
-        // Berpindah ke kata berikutnya secara berurutan atau acak
-        currentWordIndex = (currentWordIndex + 1) % wordsDatabase.length;
-        loadWord();
-    }
+        function checkAnswer() {
+            const userGuess = document.getElementById("user-guess").value.trim().toUpperCase();
+            const message = document.getElementById("message");
+            
+            if (userGuess === currentWord.word) {
+                message.style.color = "#27ae60";
+                message.innerText = "🌸 Hebat! Jawabanmu Benar.";
+            } else if (userGuess === "") {
+                message.style.color = "#e67e22";
+                message.innerText = "Masukkan jawaban terlebih dahulu!";
+            } else {
+                message.style.color = "#c0392b";
+                message.innerText = "❌ Masih Kurang Tepat, Silakan Coba Lagi.";
+            }
+        }
 
-    // Load kata pertama saat halaman dibuka
-    window.onload = loadWord;
-  </script>
-
+        window.onload = initGame;
+    </script>
 </body>
 </html>
