@@ -15,16 +15,15 @@
     box-sizing: border-box;
 }
 
-body {
-    font-family: 'Quicksand', sans-serif;
-    /* Gradasi warna tema Bloom yang bergerak */
-    background: linear-gradient(45deg, #fff0f5, #ffe4e1, #ffd1dc, #ffe4e1);
-    background-size: 400% 400%;
-    animation: bloomGradient 15s ease infinite;
-    color: #4a4a4a;
-    min-height: 100vh;
-    overflow-x: hidden;
-    position: relative;
+body {background-color: papayawhip;}
+p {font: 100;}
+p2 {text-align: left;}
+p2 {font-size: small;}
+p2 {color: pink ;}
+ul {list-style-type: none;
+background-color: powderblue;
+border: 5px;
+border-color: bisque
 }
 
 /* Animasi pergerakan warna background */
