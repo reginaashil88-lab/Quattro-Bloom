@@ -14,80 +14,87 @@
     <body>
 
         <h1>Welcome to Scramble Word Game</h1> 
-        // 1. BANK DATA KATA
-const wordsDataset = [
-    { correct: "MODEM", hint: "Alat untuk menyambungkan internet" },
-    { correct: "MOUSE", hint: "Perangkat keras untuk menggerakkan kursor" },
-    { correct: "CODING", hint: "Aktivitas menulis kode program" },
-    { correct: "DATA", hint: "Kumpulan informasi mentah" },
-    { correct: "FOLDER", hint: "Tempat menyimpan file agar rapi" },
-    { correct: "HARDDISK", hint: "Media penyimpanan data utama di komputer" },
-    { correct: "MONITOR", hint: "Layar yang menampilkan visual komputer" },
-    { correct: "ALGORITMA", hint: "Langkah-langkah logis penyelesaian masalah" }
-];
-
-let currentWordObj = {};
-let score = 0;
-
-// 2. FUNGSI UNTUK MENGACAK HURUF (Scramble)
-function scramble(word) {
-    let letters = word.split('');
-    for (let i = letters.length - 1; i > 0; i--) {
-        let j = Math.floor(Math.random() * (i + 1));
-        [letters[i], letters[j]] = [letters[j], letters[i]]; // Menukar posisi huruf
-    }
-    
-    // Antispam: Jika hasil acakan tidak sengaja sama dengan kata asli, acak ulang
-    if (letters.join('') === word) {
-        return scramble(word);
-    }
-    return letters.join('');
-}
-
-// 3. FUNGSI UNTUK MEMULAI / MENGGANTI KATA
-function nextWord() {
-    // Memilih satu objek kata secara acak dari dataset
-    const randomIndex = Math.floor(Math.random() * wordsDataset.length);
-    currentWordObj = wordsDataset[randomIndex];
-    
-    // Menampilkan kata yang sudah diacak dan petunjuknya ke HTML
-    document.getElementById("scrambledWord").innerText = scramble(currentWordObj.correct);
-    document.getElementById("hintText").innerText = "Petunjuk: " + currentWordObj.hint;
-    
-    // Membersihkan kolom input dan pesan teks sebelumnya
-    document.getElementById("userInput").value = "";
-    document.getElementById("message").innerText = "";
-}
-
-// 4. FUNGSI MEMERIKSA JAWABAN SISWA
-function checkAnswer() {
-    // Mengambil input user, menghapus spasi di ujung, dan mengubah ke huruf kapital
-    const userAns = document.getElementById("userInput").value.trim().toUpperCase();
-    const msgElement = document.getElementById("message");
-    
-    if (userAns === currentWordObj.correct) {
-        msgElement.innerText = "🎉 Benar Sekali!";
-        msgElement.style.color = "#2ecc71";
-        
-        // Menambah skor pemain
-        score += 10;
-        document.getElementById("scoreValue").innerText = score;
-        
-        // Otomatis mengganti kata baru setelah 1.5 detik
-        setTimeout(nextWord, 1500);
-    } else {
-        msgElement.innerText = "❌ Salah, coba lagi ya!";
-        msgElement.style.color = "#e74c3c";
-    }
-}
-
-// 5. JALANKAN GAME PERTAMA KALI SAAT HALAMAN SELESAI DIMUAT
-window.onload = nextWord;
+   
             
 
 
         <!-- Load external JavaScript -->
-        <script src="scripts.js">
+        <script>
+    // 1. DATA KATA DAN PETUNJUK
+    const wordsDataset = [
+        { correct: "MODEM", hint: "Alat untuk menyambungkan internet" },
+        { correct: "MOUSE", hint: "Perangkat keras untuk menggerakkan kursor" },
+        { correct: "CODING", hint: "Aktivitas menulis kode program" },
+        { correct: "DATA", hint: "Kumpulan informasi mentah" },
+        { correct: "FOLDER", hint: "Tempat menyimpan file agar rapi" },
+        { correct: "HARDDISK", hint: "Media penyimpanan data utama di komputer" },
+        { correct: "MONITOR", hint: "Layar yang menampilkan visual komputer" },
+        { correct: "ALGORITMA", hint: "Langkah-langkah logis penyelesaian masalah" }
+    ];
+
+    let currentWordObj = {}; // Menyimpan objek kata yang sedang aktif
+    let score = 0;           // Menyimpan skor pemain
+
+    // 2. FUNGSI UNTUK MENGACAK HURUF
+    function scramble(word) {
+        let letters = word.split('');
+        for (let i = letters.length - 1; i > 0; i--) {
+            let j = Math.floor(Math.random() * (i + 1));
+            // Menukar posisi huruf secara acak
+            [letters[i], letters[j]] = [letters[j], letters[i]];
+        }
+        
+        // Proteksi: Jika hasil acakan mirip kata asli, lakukan acak ulang
+        if (letters.join('') === word) {
+            return scramble(word);
+        }
+        return letters.join('');
+    }
+
+    // 3. FUNGSI UNTUK MENAMPILKAN SOAL BARU
+    function nextWord() {
+        // Memilih satu soal secara acak dari database kata
+        const randomIndex = Math.floor(Math.random() * wordsDataset.length);
+        currentWordObj = wordsDataset[randomIndex];
+        
+        // Mengacak kata yang terpilih dan menampilkannya ke layar HTML
+        document.getElementById("scrambledWord").innerText = scramble(currentWordObj.correct);
+        
+        // Menampilkan petunjuk soal ke layar HTML
+        document.getElementById("hintText").innerText = "Petunjuk: " + currentWordObj.hint;
+        
+        // Mengosongkan kembali kolom input jawaban dan pesan teks
+        document.getElementById("userInput").value = "";
+        document.getElementById("message").innerText = "";
+    }
+
+    // 4. FUNGSI UNTUK MEMERIKSA JAWABAN
+    function checkAnswer() {
+        // Mengambil teks input, menghapus spasi ujung, dan diubah ke Huruf Kapital semua
+        const userAns = document.getElementById("userInput").value.trim().toUpperCase();
+        const msgElement = document.getElementById("message");
+        
+        // Kondisi jika jawaban BENAR
+        if (userAns === currentWordObj.correct) {
+            msgElement.innerText = "🎉 Benar Sekali!";
+            msgElement.style.color = "#2ecc71"; // Mengubah teks pesan menjadi hijau
+            
+            // Menambah skor +10 dan memperbaruinya di layar HTML
+            score += 10;
+            document.getElementById("scoreValue").innerText = score;
+            
+            // Menunggu 1.5 detik (1500ms) lalu otomatis mengganti ke kata berikutnya
+            setTimeout(nextWord, 1500);
+        } 
+        // Kondisi jika jawaban SALAH
+        else {
+            msgElement.innerText = "❌ Salah, coba lagi ya!";
+            msgElement.style.color = "#e74c3c"; // Mengubah teks pesan menjadi merah
+        }
+    }
+
+    // 5. MENJALANKAN GAME SECARA OTOMATIS SAAT WEBSITE PERTAMA KALI DIBUKA
+    window.onload = nextWord;
         </script>
         
     </body>
