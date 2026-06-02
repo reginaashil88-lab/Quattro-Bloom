@@ -1,40 +1,59 @@
-<!DOCTYPE html>
-<html lang="id">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bloom | Word Scramble Game</title>
-    <link rel="stylesheet" href="style.css">
+<html lang="id"><head><style>body {transition: opacity ease-in 0.2s; } 
+body[unresolved] {opacity: 0; display: block; overflow: hidden; position: relative; } 
+</style>
+  <meta charset="UTF-8">
+  <title>QUATTRO-BLOOM : PRODUCT</title>
+  <link rel="stylesheet" href="product.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+  <link href="https://fonts.googleapis.com/css2?family=Playpen+Sans&amp;family=Modak&amp;family=DynaPuff:wght@400..700&amp;family=Delius&amp;family=Rubik+Doodle+Shadow&amp;display=swap" rel="stylesheet">
 </head>
 <body>
-    <nav class="navbar">
-        <a href="index.html" class="logo">Bloom.</a>
-        <ul class="nav-links">
-            <li><a href="index.html">Home</a></li>
-            <li><a href="design.html">Design</a></li>
-            <li><a href="product.html">Product</a></li>
-            <li><a href="about.html">About Us</a></li>
-        </ul>
-    </nav>
 
-    <div class="container">
-        <h1>Word Scramble</h1>
-        <p>Uji wawasan informatikamu dengan menyusun kembali huruf-huruf acak di bawah ini menjadi istilah yang tepat!</p>
+<!-- Background -->
+<div class="space-background">
+  <img src="bgproductfikscss.png" alt="Background" class="bg-image">
+</div>
 
-        <div class="game-box">
-            <div id="scrambled-word">...</div>
-            <p id="hint" style="font-style: italic; font-size: 15px; color: #777;">Petunjuk permainan akan muncul di sini</p>
-        </div>
+<!-- Navbar -->
+<div class="navbar-container">
+  <div class="navbar-left">
+    <ul class="ul-navbar-container">
+      <li class="li-navbar-brand">QUATTRO-BLOOM</li>
+    </ul>
+  </div>
+  <div class="navbar-right">
+    <ul class="ul-navbar-container">
+      <li class="li-navbar-container"><a href="index.html">Home</a></li>
+      <li class="li-navbar-container"><a href="index.html#introduce-container">About Us</a></li>
+      <li class="li-navbar-container"><a href="process.html">Process</a></li>
+      <li class="li-navbar-container"><a href="product.html">Design Product</a></li>
+    </ul>
+  </div>
+</div>
 
-        <input type="text" id="user-guess" placeholder="Ketik susunan kata di sini...">
-        <br>
-        <button class="btn" onclick="checkAnswer()">Periksa Jawaban</button>
-        <button class="btn" onclick="initGame()" style="background: var(--pink-blossom); color: var(--deep-cherry);">Ganti Kata</button>
-        
-        <p id="message" style="margin-top: 25px; font-weight: bold; font-size: 20px;"></p>
-    </div>
+<!-- Kalkulator Berat -->
+<div class="container">
+  <h1>Kalkulator Berat di Planet 🪐</h1>
+  <p>Masukkan berat badan kamu di Bumi (kg):</p>
+  <input type="number" id="earthWeight" placeholder="Contoh: 60">
+  <br>
+  <label for="planetSelect">Pilih Planet:</label>
+  <select id="planetSelect">
+    <option value="0.38">Merkurius</option>
+    <option value="0.91">Venus</option>
+    <option value="0.38">Mars</option>
+    <option value="2.34">Jupiter</option>
+    <option value="0.93">Saturnus</option>
+    <option value="0.92">Uranus</option>
+    <option value="1.12">Neptunus</option>
+  </select>
+  <br><br>
+  <button onclick="calculate()">Hitung Berat</button>
+  <div id="result"></div>
+</div>
 
-    <script>
+<script>
         const words = [
             { word: "DATABASE", scramble: "TEBASADA", hint: "Sistem penyimpanan data digital yang terstruktur." },
             { word: "NETWORK", scramble: "KROWTEN", hint: "Jaringan koneksi antar perangkat komputer." },
@@ -71,37 +90,8 @@
         }
 
         window.onload = initGame;
-    </script>
-</body>
-    <script>
-    function createPetal() {
-        const petal = document.createElement('div');
-        petal.classList.add('bloom-petal');
-        
-        // Mengatur ukuran kelopak secara acak (antara 10px sampai 22px)
-        const size = Math.random() * 12 + 10 + 'px';
-        petal.style.width = size;
-        petal.style.height = size;
-        
-        // Mengatur posisi horizontal acak saat muncul
-        petal.style.left = Math.random() * window.innerWidth + 'px';
-        
-        // Mengatur durasi jatuh acak agar terlihat alami (antara 5 sampai 10 detik)
-        petal.style.animationDuration = Math.random() * 5 + 5 + 's';
-        
-        // Variasi warna pink kelopak bunga secara acak
-        const bloomColors = ['#ffb7c5', '#ffe4e1', '#ffd1dc', '#ffc0cb'];
-        petal.style.backgroundColor = bloomColors[Math.floor(Math.random() * bloomColors.length)];
-
-        document.body.appendChild(petal);
-
-        // Menghapus elemen kelopak setelah animasi jatuh selesai agar website tidak berat
-        setTimeout(() => {
-            petal.remove();
-        }, 10000);
-    }
-
-    // Memunculkan kelopak bunga baru setiap 400 milidetik
-    setInterval(createPetal, 400);
 </script>
-</html>
+
+
+
+<veepn-lock-screen><style>@font-face{font-family:FigtreeVF;src:url(chrome-extension://majdfhpaihoncoakbjgbdhglocklcgno/fonts/FigtreeVF.woff2) format("woff2 supports variations"),url(chrome-extension://majdfhpaihoncoakbjgbdhglocklcgno/fonts/FigtreeVF.woff2) format("woff2-variations");font-weight:100 1000;font-display:swap}</style></veepn-lock-screen></body></html>
