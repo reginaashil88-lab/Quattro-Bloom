@@ -1,28 +1,96 @@
-<!doctype html>
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SPARK : PRODUCT</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playpen+Sans&family=DynaPuff:wght@400..700&family=Delius&display=swap" rel="stylesheet">
+</head>
+<body>
 
-<html>
-    <head>
-        <meta charset="utf-8">
+  <div class="navbar-container">
+    <div class="navbar-left">
+      <ul class="ul-navbar-container">
+        <li class="li-navbar-brand">SPARK</li>
+      </ul>
+    </div>
+    <div class="navbar-right">
+      <ul class="ul-navbar-container">
+        <li class="li-navbar-container"><a href="index.html">Home</a></li>
+        <li class="li-navbar-container"><a href="product.html">Product</a></li>
+        <li class="li-navbar-container"><a href="desain.html">Design</a></li>
+        <li class="li-navbar-container"><a href="about.html">About Us</a></li>
+      </ul>
+    </div>
+  </div>
 
-        <title>Blank template</title>
+  <div class="container">
+    <h1>Word Scramble: Informatika 💻</h1>
+    <p>Susun kembali huruf-huruf di bawah ini menjadi istilah informatika yang benar!</p>
+    
+    <div style="background: rgba(0,0,0,0.2); padding: 15px; border-radius: 10px; margin-bottom: 20px;">
+        <h2 id="scrambledWord" style="letter-spacing: 5px; color: #ff00ff; font-size: 32px;">KODIGN</h2>
+        <small id="wordHint" style="color: #aaa; font-style: italic;">Petunjuk: Menulis baris kode program</small>
+    </div>
 
-        <!-- Load external CSS styles -->
-        <link rel="stylesheet" href="styles.css">
+    <input type="text" id="userInput" placeholder="Ketik jawabanmu di sini...">
+    <br>
+    <button onclick="checkAnswer()">Periksa Jawaban</button>
+    <button onclick="nextWord()" style="background: #0099ff; color: white;">Kata Lain</button>
+    
+    <div id="result"></div>
+  </div>
 
-    </head>
+  <script>
+    // Daftar kata bertema informatika
+    const wordsDatabase = [
+        { correct: "CODING", scrambled: "KODIGN", hint: "Proses menulis instruksi untuk komputer (Bahasa Inggris)." },
+        { correct: "ALGORITMA", scrambled: "AMTIROLGA", hint: "Langkah-langkah logis dan berurutan untuk menyelesaikan masalah." },
+        { correct: "INTERNET", scrambled: "TENRETNI", hint: "Jaringan global yang menghubungkan komputer di seluruh dunia." },
+        { correct: "SOFTWARE", scrambled: "ERAWFTOS", hint: "Perangkat lunak atau aplikasi komputer." },
+        { correct: "HARDWARE", scrambled: "ERAWDRHA", hint: "Komponen fisik penyusun komputer." }
+    ];
 
-    <body>
+    let currentWordIndex = 0;
 
-        <h1>Welcome to Scramble Word Game</h1> 
-   
-            
+    function loadWord() {
+        const currentData = wordsDatabase[currentWordIndex];
+        document.getElementById("scrambledWord").innerText = currentData.scrambled;
+        document.getElementById("wordHint").innerText = `Petunjuk: ${currentData.hint}`;
+        document.getElementById("userInput").value = "";
+        document.getElementById("result").innerText = "";
+        document.getElementById("result").className = "";
+    }
 
+    function checkAnswer() {
+        const userAnswer = document.getElementById("userInput").value.trim().toUpperCase();
+        const correctAnswer = wordsDatabase[currentWordIndex].correct;
+        const resultDiv = document.getElementById("result");
 
-        <!-- Load external JavaScript -->
-      <script href="styles.css">       
-        </script>
-        
-    </body>
+        if (userAnswer === correctAnswer) {
+            resultDiv.innerHTML = "🎉 Benar! Kerja bagus!";
+            resultDiv.className = "correct";
+        } else if (userAnswer === "") {
+            resultDiv.innerHTML = "Isi jawabanmu terlebih dahulu!";
+            resultDiv.className = "";
+        } else {
+            resultDiv.innerHTML = "❌ Salah! Coba tebak lagi ya.";
+            resultDiv.className = "wrong";
+        }
+    }
 
+    function nextWord() {
+        // Berpindah ke kata berikutnya secara berurutan atau acak
+        currentWordIndex = (currentWordIndex + 1) % wordsDatabase.length;
+        loadWord();
+    }
+
+    // Load kata pertama saat halaman dibuka
+    window.onload = loadWord;
+  </script>
+
+</body>
 </html>
-
