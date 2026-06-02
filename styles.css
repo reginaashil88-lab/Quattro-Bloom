@@ -17,10 +17,53 @@
 
 body {
     font-family: 'Quicksand', sans-serif;
-    background: linear-gradient(135deg, #fff0f5 0%, #ffe4e1 100%);
+    /* Gradasi warna tema Bloom yang bergerak */
+    background: linear-gradient(45deg, #fff0f5, #ffe4e1, #ffd1dc, #ffe4e1);
+    background-size: 400% 400%;
+    animation: bloomGradient 15s ease infinite;
     color: #4a4a4a;
     min-height: 100vh;
     overflow-x: hidden;
+    position: relative;
+}
+
+/* Animasi pergerakan warna background */
+@keyframes bloomGradient {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* Style Elemen Kelopak Bunga (Bloom Petals) */
+.bloom-petal {
+    position: fixed; /* Menggunakan fixed agar tetap di posisi latar belakang saat di-scroll */
+    top: -20px;
+    background-color: #ffb7c5;
+    border-radius: 150% 0 150% 150%; /* Membuat bentuk kelopak bunga */
+    opacity: 0.8;
+    pointer-events: none; /* Agar tidak mengganggu klik tombol/input */
+    z-index: -1; /* Berada di belakang teks dan container */
+    animation: fall linear infinite;
+}
+
+/* Animasi kelopak bunga jatuh dan berputar */
+@keyframes fall {
+    0% {
+        top: -20px;
+        transform: translateX(0) rotate(0deg);
+        opacity: 0;
+    }
+    10% {
+        opacity: 0.8;
+    }
+    90% {
+        opacity: 0.8;
+    }
+    100% {
+        top: 100vh;
+        transform: translateX(150px) rotate(450deg);
+        opacity: 0;
+    }
 }
 
 /* Navbar Modern & Clean */
