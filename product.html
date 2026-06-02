@@ -13,60 +13,81 @@
 
     <body>
 
-        <h1>Welcome to rengginang website</h1>
-        <br>
-        <ul>
-            <li><a href= "index.html"> Home </a></li>
-            <li><a href= "design.html"> Design </a></li>
-            <li> - Product </li>
-            </ul>
-        <marquee> Design by regina</marquee>
-        <pre>
-        <P>haii semua👋🏻 capek ga si dengerin lagu itu itu aja? sama! 
-         makanya, di sini aku mau spill the tea tentang lagu yang 
-         selama ini selalu jadi teman headset terbaikku🤩 
-         nahh laguu ituuu adalah TEKA TEKI🧸</P>
-        <P> - Teka Teki - </P>
-        <P class = "p2">
-        'Dirimu buatku slalu penasaran 
-        Terkadang menjauh terkadang buat ku tersipu
-        Malu manisnya ucapanmu
-        Membuatku tak menentu
-        Ku tak tahu harus bagaimana
-        
-        Sungguh kau buatku bertanya-tanya
-        Dengan teka teki teka-tekimu
-        Mungkinkah ku temukan jawaban
-        Teka-teki teka-tekimu
-        
-        Sadarkah dirimu akan apa yang ku rasa
-        Haruskah diriku menyatakan yang sesungguhnya
-        Malu manisnya ucapanmu
-        Membuatku tak menentu
-        Ku tak tahu bagaimana
-        
-        Sungguh kau buat ku bertanya tanya
-        Dengan teka-teki teka-tekimu
-        Mungkinkah ku temukan jawaban
-        Teka-teki teka-tekimu
-
-        Sungguh kau buat ku bertanya tanya 
-        Dengan teka-teki teka-tekimu
-        Mungkinkah ku temukan jawaban
-        Teka-teki teka-tekimu
-
-        Terkadang ku merasa hampir tak mampu
-        Menghadapi kamu dan semua tanda tanyamu
-
-        Sungguh kau buatku bertanya tanya
-        Dengan teka-teki teka-tekimu
-        Mungkinkah ku temukan jawaban
-        Teka-teki teka-tekimu'
-            <br>
-
-            
+        <h1>Welcome to rengginang website</h1>            
         <!-- Load external JavaScript -->
-        <script src="scripts.js"></script>
+        <script src="scripts.js">
+// 1. BANK DATA KATA (Materi Informatika Umum Kelas 10)
+const wordsDataset = [
+    { correct: "MODEM", hint: "Alat untuk menyambungkan internet" },
+    { correct: "MOUSE", hint: "Perangkat keras untuk menggerakkan kursor" },
+    { correct: "CODING", hint: "Aktivitas menulis kode program" },
+    { correct: "DATA", hint: "Kumpulan informasi mentah" },
+    { correct: "FOLDER", hint: "Tempat menyimpan file agar rapi" },
+    { correct: "HARDDISK", hint: "Media penyimpanan data utama di komputer" },
+    { correct: "MONITOR", hint: "Layar yang menampilkan visual komputer" },
+    { correct: "ALGORITMA", hint: "Langkah-langkah logis penyelesaian masalah" }
+];
+
+let currentWordObj = {};
+let score = 0;
+
+// 2. FUNGSI UNTUK MENGACAK HURUF (Scramble)
+function scramble(word) {
+    let letters = word.split('');
+    for (let i = letters.length - 1; i > 0; i--) {
+        let j = Math.floor(Math.random() * (i + 1));
+        [letters[i], letters[j]] = [letters[j], letters[i]]; // Menukar posisi huruf
+    }
+    
+    // Antispam: Jika hasil acakan tidak sengaja sama dengan kata asli, acak ulang
+    if (letters.join('') === word) {
+        return scramble(word);
+    }
+    return letters.join('');
+}
+
+// 3. FUNGSI UNTUK MEMULAI / MENGGANTI KATA
+function nextWord() {
+    // Memilih satu objek kata secara acak dari dataset
+    const randomIndex = Math.floor(Math.random() * wordsDataset.length);
+    currentWordObj = wordsDataset[randomIndex];
+    
+    // Menampilkan kata yang sudah diacak dan petunjuknya ke HTML
+    document.getElementById("scrambledWord").innerText = scramble(currentWordObj.correct);
+    document.getElementById("hintText").innerText = "Petunjuk: " + currentWordObj.hint;
+    
+    // Membersihkan kolom input dan pesan teks sebelumnya
+    document.getElementById("userInput").value = "";
+    document.getElementById("message").innerText = "";
+}
+
+// 4. FUNGSI MEMERIKSA JAWABAN SISWA
+function checkAnswer() {
+    // Mengambil input user, menghapus spasi di ujung, dan mengubah ke huruf kapital
+    const userAns = document.getElementById("userInput").value.trim().toUpperCase();
+    const msgElement = document.getElementById("message");
+    
+    if (userAns === currentWordObj.correct) {
+        msgElement.innerText = "🎉 Benar Sekali!";
+        msgElement.style.color = "#2ecc71";
+        
+        // Menambah skor pemain
+        score += 10;
+        document.getElementById("scoreValue").innerText = score;
+        
+        // Otomatis mengganti kata baru setelah 1.5 detik
+        setTimeout(nextWord, 1500);
+    } else {
+        msgElement.innerText = "❌ Salah, coba lagi ya!";
+        msgElement.style.color = "#e74c3c";
+    }
+}
+
+// 5. JALANKAN GAME PERTAMA KALI SAAT HALAMAN SELESAI DIMUAT
+window.onload = nextWord;
+            
+
+        </script>
         
     </body>
 
