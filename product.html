@@ -160,10 +160,30 @@
       <input type="text" id="tebakan" placeholder="Masukkan tebakanmu...">
       
       <div style="margin-top: 10px;">
-        <button id="cek-btn" py-click="cek_jawaban">Cek Jawaban</button>
-        <button id="reset-btn" py-click="mulai_game" style="background: #4ceda2; color: #05131d;">Main Lagi</button>
+        <button id="cek-btn">Cek Jawaban</button>
+        <button id="reset-btn" style="background: #4ceda2; color: #05131d;">Main Lagi</button>
       </div>
       
       <p id="hasil" style="font-weight: bold; font-size: 1.2rem; margin-top: 15px; text-shadow: 1px 1px 2px rgba(0,0,0,0.5);"></p>
     </div>
   </div>
+
+  <script type="py">
+import random
+from js import document
+from py import create_proxy
+
+kata_asli = ""
+daftar_kata = [
+    "INFORMATIKA", "ALGORITMA", "PEMROGRAMAN", "DATABASE", "HARDWARE", 
+    "SOFTWARE", "JAVASCRIPT", "INTERNET", "JARINGAN", "KOMPUTER"
+]
+
+def mulai_game(event=None):
+    global kata_asli
+    kata_baru = random.choice(daftar_kata)
+    while kata_baru == kata_asli:
+        kata_baru = random.choice(daftar_kata)
+        
+    kata_asli = kata_baru
+    huruf = list(
