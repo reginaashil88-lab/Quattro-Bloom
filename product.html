@@ -5,8 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Product - QUATTRO BLOOM</title>
   <link rel="stylesheet" href="style.css">
-  <link rel="stylesheet" href="https://pyscript.net/latest/pyscript.css" />
-  <script defer src="https://pyscript.net/latest/pyscript.js"></script>
+  
+  <link rel="stylesheet" href="https://pyscript.net/releases/2024.1.1/core.css" />
+  <script type="module" src="https://pyscript.net/releases/2024.1.1/core.js"></script>
+
   <style>
     /* KONSISTENSI BACKGROUND */
     body {
@@ -18,8 +20,8 @@
       font-family: Arial, sans-serif;
     }
 
-    /* TRICK: Menyembunyikan teks kode Python mentah saat web sedang loading */
-    py-script {
+    /* Menyembunyikan elemen sebelum PyScript siap sepenuhnya */
+    script[type="py"] {
       display: none;
     }
 
@@ -154,7 +156,7 @@
         </ol>
       </div>
 
-      <h3 id="acak-kata" style="color: white; font-size: 1.4rem; margin-bottom: 20px; letter-spacing: 1px;">Memuat kata acak...</h3>
+      <h3 id="acak-kata" style="color: white; font-size: 1.4rem; margin-bottom: 20px; letter-spacing: 1px;">Memuat game...</h3>
       <input type="text" id="tebakan" placeholder="Masukkan tebakanmu...">
       
       <div style="margin-top: 10px;">
@@ -165,48 +167,3 @@
       <p id="hasil" style="font-weight: bold; font-size: 1.2rem; margin-top: 15px; text-shadow: 1px 1px 2px rgba(0,0,0,0.5);"></p>
     </div>
   </div>
-
-  <py-script>
-import random
-from js import document
-
-kata_asli = ""
-# 10 Kosakata bertema Informatika
-daftar_kata = [
-    "INFORMATIKA", "ALGORITMA", "PEMROGRAMAN", "DATABASE", "HARDWARE", 
-    "SOFTWARE", "JAVASCRIPT", "INTERNET", "JARINGAN", "KOMPUTER"
-]
-
-def mulai_game(*args):
-    global kata_asli
-    # Memastikan tidak memunculkan kata yang sama persis berturut-turut secara tidak sengaja
-    kata_baru = random.choice(daftar_kata)
-    while kata_baru == kata_asli:
-        kata_baru = random.choice(daftar_kata)
-        
-    kata_asli = kata_baru
-    huruf = list(kata_asli)
-    
-    # Memastikan hasil acakan tidak sama persis dengan kata asli
-    while "".join(huruf) == kata_asli:
-        random.shuffle(huruf)
-        
-    kata_acak = "".join(huruf)
-    document.getElementById("acak-kata").innerText = f"Kata Acak: {kata_acak}"
-    document.getElementById("tebakan").value = ""
-    document.getElementById("hasil").innerText = ""
-
-def cek_jawaban(*args):
-    tebakan_user = document.getElementById("tebakan").value.upper().strip()
-    if tebakan_user == kata_asli:
-        document.getElementById("hasil").innerText = "Yeay! Jawabanmu BENAR!"
-        document.getElementById("hasil").style.color = "#e6e82a"
-    else:
-        document.getElementById("hasil").innerText = "Yah, masih salah. Coba lagi!"
-        document.getElementById("hasil").style.color = "#ff6b6b"
-
-# Menjalankan game pertama kali saat script dimuat
-mulai_game()
-  </py-script>
-</body>
-</html>
