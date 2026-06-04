@@ -15,6 +15,7 @@
                   url('bg_powerpuff-girls.jpeg') no-repeat center center fixed;
       background-size: contain; 
       background-color: #05131d; 
+      font-family: Arial, sans-serif;
     }
 
     /* TRICK: Menyembunyikan teks kode Python mentah saat web sedang loading */
@@ -66,6 +67,31 @@
       box-shadow: 0 8px 16px rgba(0,0,0,0.3);
       max-width: 500px;
       margin: 0 auto;
+      text-align: center;
+    }
+    
+    /* PETUNJUK BERMAIN */
+    .petunjuk {
+      background: rgba(255, 255, 255, 0.1);
+      border-left: 4px solid #ec1cce;
+      padding: 15px;
+      border-radius: 5px;
+      margin-bottom: 25px;
+      text-align: left;
+      color: #f0f0f0;
+      font-size: 0.9rem;
+      line-height: 1.4;
+    }
+
+    .petunjuk h4 {
+      margin: 0 0 8px 0;
+      color: #e6e82a;
+      text-transform: uppercase;
+    }
+
+    .petunjuk ol {
+      margin: 0;
+      padding-left: 20px;
     }
     
     input, button { 
@@ -81,6 +107,8 @@
       background: rgba(255, 255, 255, 0.9);
       color: #05131d;
       text-align: center;
+      width: 80%;
+      box-sizing: border-box;
     }
     
     button { 
@@ -97,6 +125,7 @@
 
     .top-content {
       padding-top: 120px;
+      padding-bottom: 50px;
     }
   </style>
 </head>
@@ -111,47 +140,73 @@
     <a href="about.html">About</a>
   </div>
 
-  <div class="created">
-    <span>Created by</span>
-    <h2>SMAN 71</h2>
-    <p><a href="about.html">Quattro Bloom Team</a></p>
-  </div>
-
-  <div class="container top-content" style="flex-direction: column; height: auto; min-height: auto;">
-    <h2 style="font-size: 2.5rem; color: #ec1cce; text-shadow: 2px 2px #fff; margin-bottom: 20px; text-align: center;">Game: BLOOM SCRUMBLE</h2>
+  <div class="container top-content" style="display: flex; flex-direction: column; height: auto; min-height: auto;">
+    <h2 style="font-size: 2.5rem; color: #ec1cce; text-shadow: 2px 2px #fff; margin-bottom: 20px; text-align: center;">Game: BLOOM SCRAMBLE</h2>
+    
     <div class="game-box">
+      <div class="petunjuk">
+        <h4>Cara Bermain:</h4>
+        <ol>
+          <li>Perhatikan susunan huruf acak bertema <strong>Informatika</strong> yang muncul.</li>
+          <li>Susun kembali huruf-huruf tersebut menjadi satu kata yang benar.</li>
+          <li>Ketik jawabanmu di kolom input, lalu klik tombol <strong>Cek Jawaban</strong>.</li>
+          <li>Jika benar, klik tombol <strong>Main Lagi</strong> untuk mengacak kata baru!</li>
+        </ol>
+      </div>
+
       <h3 id="acak-kata" style="color: white; font-size: 1.4rem; margin-bottom: 20px; letter-spacing: 1px;">Memuat kata acak...</h3>
       <input type="text" id="tebakan" placeholder="Masukkan tebakanmu...">
-      <button id="cek-btn" py-click="cek_jawaban()">Cek Jawaban</button>
+      
+      <div style="margin-top: 10px;">
+        <button id="cek-btn" py-click="cek_jawaban">Cek Jawaban</button>
+        <button id="reset-btn" py-click="mulai_game" style="background: #4ceda2; color: #05131d;">Main Lagi</button>
+      </div>
+      
       <p id="hasil" style="font-weight: bold; font-size: 1.2rem; margin-top: 15px; text-shadow: 1px 1px 2px rgba(0,0,0,0.5);"></p>
     </div>
   </div>
 
   <py-script>
-    import random
-    from js import document
+import random
+from js import document
 
-    kata_asli = ""
-    daftar_kata = ["INFORMATIKA", "QUATTRO", "BLOOM", "POWERPUFF", "WEBSITE"]
+kata_asli = ""
+# 10 Kosakata bertema Informatika
+daftar_kata = [
+    "INFORMATIKA", "ALGORITMA", "PEMROGRAMAN", "DATABASE", "HARDWARE", 
+    "SOFTWARE", "JAVASCRIPT", "INTERNET", "JARINGAN", "KOMPUTER"
+]
 
-    def mulai_game():
-        global kata_asli
-        kata_asli = random.choice(daftar_kata)
-        huruf = list(kata_asli)
+def mulai_game(*args):
+    global kata_asli
+    # Memastikan tidak memunculkan kata yang sama persis berturut-turut secara tidak sengaja
+    kata_baru = random.choice(daftar_kata)
+    while kata_baru == kata_asli:
+        kata_baru = random.choice(daftar_kata)
+        
+    kata_asli = kata_baru
+    huruf = list(kata_asli)
+    
+    # Memastikan hasil acakan tidak sama persis dengan kata asli
+    while "".join(huruf) == kata_asli:
         random.shuffle(huruf)
-        kata_acak = "".join(huruf)
-        document.getElementById("acak-kata").innerText = f"Kata Acak: {kata_acak}"
+        
+    kata_acak = "".join(huruf)
+    document.getElementById("acak-kata").innerText = f"Kata Acak: {kata_acak}"
+    document.getElementById("tebakan").value = ""
+    document.getElementById("hasil").innerText = ""
 
-    def cek_jawaban(*args):
-        tebakan_user = document.getElementById("tebakan").value.upper()
-        if tebakan_user == kata_asli:
-            document.getElementById("hasil").innerText = "Yeay! Jawabanmu BENAR!"
-            document.getElementById("hasil").style.color = "#e6e82a"
-        else:
-            document.getElementById("hasil").innerText = "Yah, masih salah. Coba lagi!"
-            document.getElementById("hasil").style.color = "#ff6b6b"
+def cek_jawaban(*args):
+    tebakan_user = document.getElementById("tebakan").value.upper().strip()
+    if tebakan_user == kata_asli:
+        document.getElementById("hasil").innerText = "Yeay! Jawabanmu BENAR!"
+        document.getElementById("hasil").style.color = "#e6e82a"
+    else:
+        document.getElementById("hasil").innerText = "Yah, masih salah. Coba lagi!"
+        document.getElementById("hasil").style.color = "#ff6b6b"
 
-    mulai_game()
+# Menjalankan game pertama kali saat script dimuat
+mulai_game()
   </py-script>
 </body>
 </html>
