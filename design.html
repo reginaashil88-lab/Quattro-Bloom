@@ -3,10 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>About - QUATTRO BLOOM</title>
+  <title>Design - QUATTRO BLOOM</title>
   <link rel="stylesheet" href="style.css">
   <style>
-    /* FIX BACKGROUND: Ukuran baik, benar, dan proporsional */
+    /* KONSISTENSI BACKGROUND */
     body {
       margin: 0;
       background: linear-gradient(to top, rgba(19, 78, 137, 0.85), rgba(5, 19, 29, 0.95)), 
@@ -15,27 +15,27 @@
       background-color: #05131d; 
     }
 
-    /* FIX LOGO & NAV MENU: Membuat logo kecil dan rapi seperti ikon website */
+    /* KONSISTENSI LOGO & NAV MENU */
     .nav-menu {
       position: absolute;
       top: 20px;
       left: 30px;
       display: flex;
-      align-items: center; /* Membuat logo dan teks sejajar secara vertikal */
+      align-items: center;
       gap: 20px;
       z-index: 1000;
     }
 
     .nav-menu img {
-      height: 35px; /* Mengubah ukuran logo menjadi seukuran ikon navigasi standar */
+      height: 35px;
       width: auto;
-      object-fit: contain; /* Menjaga logo tidak gepeng atau pecah */
-      filter: drop-shadow(0px 2px 4px rgba(0, 0, 0, 0.5)); /* Efek bayangan halus pada logo */
+      object-fit: contain;
+      filter: drop-shadow(0px 2px 4px rgba(0, 0, 0, 0.5));
       transition: transform 0.2s ease;
     }
 
     .nav-menu img:hover {
-      transform: scale(1.1); /* Sedikit membesar saat didekati kursor */
+      transform: scale(1.1);
     }
 
     .nav-menu a {
@@ -51,98 +51,14 @@
       color: #e6e82a;
     }
 
-    /* 1. Styling untuk memperbesar, merapikan nama, dan menambah animasi foto */
-    .photo-grid {
-      display: flex;
-      justify-content: center;
-      flex-wrap: wrap;
-      gap: 25px; 
-      margin-bottom: 40px;
-    }
-
-    .photo-card {
-      text-align: center;
-      width: 130px; 
-      transition: transform 0.3s ease; 
-    }
-
-    .photo-card:hover {
-      transform: scale(1.12) rotate(3deg); 
-    }
-
-    .photo-card img {
-      width: 130px;  
-      height: 130px; 
-      object-fit: cover; 
-      border-radius: 50%; 
-      border: 4px solid #ec1cce; 
-      box-shadow: 0 6px 12px rgba(0,0,0,0.4);
-    }
-
-    .photo-card p {
-      font-size: 0.8rem; 
-      margin: 12px 0 0 0; 
-      font-weight: bold;
-      color: white;
-      text-transform: uppercase;
-      text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8); 
-      letter-spacing: 0.5px;
-    }
-
-    /* 2. Styling untuk Embed Canva seukuran layar full */
-    .full-screen-canva {
-      width: 100vw; 
-      position: relative;
-      margin-left: -50vw; 
-      left: 50%;
-    }
-
-    .canva-embed-holder {
-      position: relative;
-      width: 100%;
-      height: 0;
-      padding-top: 56.25%; 
-      overflow: hidden;
-      will-change: transform;
-    }
-
-    .canva-embed-holder iframe {
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      top: 0;
-      left: 0;
-      border: none;
-      padding: 0;
-      margin: 0;
-    }
-
-    .canva-caption {
-      text-align: center;
-      background: rgba(0, 0, 0, 0.7);
-      padding: 15px;
-      margin: 0;
-      font-size: 0.9rem;
-    }
-
-    .canva-caption a {
-      color: #e6e82a;
-      text-decoration: none;
-      font-weight: bold;
-    }
-
     .top-content {
-      padding-top: 80px; 
+      padding-top: 100px; /* Agar layout game turun ke bawah navigasi */
     }
   </style>
 </head>
 <body>
-  <!-- Backsound Music -->
-  <audio autoplay loop>
-    <source src="supershy.mp3" type="audio/mpeg">
-  </audio>
+  <audio autoplay loop><source src="supershy.mp3" type="audio/mpeg"></audio>
 
-  <!-- Menu Navigasi Sisi Kiri (Path Logo Sudah Diperbarui) -->
   <div class="nav-menu">
     <img src="src/sman71xsekolahpeggerak2small.png" alt="Logo SMAN 71">
     <a href="index.html">Home</a>
@@ -151,51 +67,26 @@
     <a href="about.html">About</a>
   </div>
 
-  <!-- Watermark Badge Pojok Kanan Atas -->
   <div class="created">
     <span>Created by</span>
     <h2>SMAN 71</h2>
     <p><a href="about.html">Quattro Bloom Team</a></p>
   </div>
 
-  <!-- Bagian Atas: Foto Kreator -->
-  <div class="container top-content" style="flex-direction: column; height: auto; min-height: auto; gap: 20px;">
+  <div class="container float-item top-content" style="flex-direction: column; height: auto; min-height: auto; gap: 10px;">
+    <h2 style="font-size: 2rem; color: #ec1cce; text-shadow: 2px 2px #fff; margin-bottom: 15px;">Cara Bermain BLOOM SCRUMBLE</h2>
+    <ol style="text-align: left; background: rgba(0,0,0,0.6); padding: 20px 40px; border-radius: 10px; color: white; max-width: 600px; margin: 0 auto;">
+      <li>Lihat kata yang hurufnya sudah diacak di layar.</li>
+      <li>Tebak kata asli yang berhubungan dengan Informatika atau web ini.</li>
+      <li>Ketik tebakanmu di kolom yang disediakan lalu cek hasilnya!</li>
+    </ol>
     
-    <div style="width: 100%; text-align: center;">
-      <h2 style="font-size: 2rem; color: #ec1cce; text-shadow: 2px 2px #fff; margin-bottom: 25px;">The Creators</h2>
-      
-      <!-- Blok 1: Foto Para Pembuat Web -->
-      <div class="photo-grid">
-        <div class="photo-card">
-          <img src="src/Lifia.jpeg" alt="Lifia Ramadhani (16)">
-          <p>LIFIA RAMADHANI</p>
-        </div>
-        <div class="photo-card">
-          <img src="src/Raissav2.jpeg" alt="Raissa Sena P. N. (28)">
-          <p>RAISSA SENA P. N.</p>
-        </div>
-        <div class="photo-card">
-          <img src="src/Regina.jpeg" alt="Regina Ashil W. (30)">
-          <p>REGINA ASHIL W.</p>
-        </div>
-        <div class="photo-card">
-          <img src="src/kenv2.jpeg" alt="Cut Maura Kenzia (5)">
-          <p>CUT MAURA KENZIA</p>
-        </div>
-      </div>
-    </div>
-  </div> 
-
-  <!-- Bagian Bawah: Embed Canva Full Screen -->
-  <div class="full-screen-canva">
-    <div class="canva-embed-holder">
-      <iframe loading="lazy" src="https://www.canva.com/design/DAHLd6Bq4uE/naSYenz0Zz470BYmXbyegg/view?embed" allowfullscreen="allowfullscreen" allow="fullscreen">
+    <div style="position: relative; width: 100%; max-width: 800px; height: 0; padding-top: 45%; box-shadow: 0 4px 15px rgba(0,0,0,0.4); margin: 2em auto 0.5em auto; overflow: hidden; border-radius: 12px; will-change: transform;">
+      <iframe loading="lazy" style="position: absolute; width: 100%; height: 100%; top: 0; left: 0; border: none; padding: 0; margin: 0;"
+        src="https://www.canva.com/design/DAHI29ryl5g/Te3W2GucOihuWUuiarV_eA/view?embed" allowfullscreen="allowfullscreen" allow="fullscreen">
       </iframe>
     </div>
-    <p class="canva-caption">
-      <a href="https://www.canva.com/design/DAHLd6Bq4uE/naSYenz0Zz470BYmXbyegg/view?utm_content=DAHLd6Bq4uE&amp;utm_campaign=designshare&amp;utm_medium=embeds&amp;utm_source=link" target="_blank" rel="noopener">Behind The Bloom</a> by REGINA ASHIL WAHYUDI
-    </p>
+    <p style="font-size: 0.85rem;"><a href="https://www.canva.com/design/DAHI29ryl5g/Te3W2GucOihuWUuiarV_eA/view?utm_content=DAHI29ryl5g&amp;utm_campaign=designshare&amp;utm_medium=embeds&amp;utm_source=link" target="_blank" rel="noopener" style="color: #e6e82a; text-decoration: none; font-weight: bold;">Pink Cute Y2K / Digitalism Style Presentation</a> by REGINA ASHIL WAHYUDI</p>
   </div>
-
 </body>
 </html>
