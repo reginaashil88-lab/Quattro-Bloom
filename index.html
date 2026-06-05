@@ -1,89 +1,48 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>QUATTRO BLOOM - Home</title>
-  <link rel="stylesheet" href="style.css">
-  <style>
-    /* KONSISTENSI BACKGROUND */
-    body {
-      margin: 0;
-      background: linear-gradient(to top, rgba(19, 78, 137, 0.85), rgba(5, 19, 29, 0.95)), 
-                  url('bg_powerpuff-girls.jpeg') no-repeat center center fixed;
-      background-size: contain; 
-      background-color: #05131d; 
-    }
-
-    /* KONSISTENSI LOGO & NAV MENU */
-    .nav-menu {
-      position: absolute;
-      top: 20px;
-      left: 30px;
-      display: flex;
-      align-items: center;
-      gap: 20px;
-      z-index: 1000;
-    }
-
-    .nav-menu img {
-      height: 35px;
-      width: auto;
-      object-fit: contain;
-      filter: drop-shadow(0px 2px 4px rgba(0, 0, 0, 0.5));
-      transition: transform 0.2s ease;
-    }
-
-    .nav-menu img:hover {
-      transform: scale(1.1);
-    }
-
-    .nav-menu a {
-      color: white;
-      text-decoration: none;
-      font-weight: bold;
-      font-size: 0.9rem;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-    }
-
-    .nav-menu a:hover {
-      color: #e6e82a;
-    }
-
-    .top-content {
-      padding-top: 100px; /* Memberi ruang agar tidak tertabrak menu atas */
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QUATTRO BLOOM - Home</title>
+    <link rel="icon" type="image/x-icon" href="src/favicon.ico">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <audio autoplay loop>
-    <source src="supershy.mp3" type="audio/mpeg">
-  </audio>
+    <header>
+        <div class="logo-container">
+            <img src="src/logosman71.png" alt="Logo SMAN 71" class="logo-school">
+            <span class="site-title">QUATTRO BLOOM</span>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="home.html" target="_self">Home</a></li>
+                <li><a href="design.html" target="_self">Design</a></li>
+                <li><a href="product.html" target="_self">Product</a></li>
+                <li><a href="about.html" target="_self">About Us</a></li>
+            </ul>
+        </nav>
+    </header>
 
-  <div class="nav-menu">
-    <img src="src/sman71xsekolahpeggerak2small.png" alt="Logo SMAN 71">
-    <a href="index.html">Home</a>
-    <a href="design.html">Design</a>
-    <a href="product.html">Product</a>
-    <a href="about.html">About</a>
-  </div>
+    <main class="container">
+        <div class="card-panel text-center">
+            <h1 style="font-size: 36px; color: var(--blossom-dark); text-shadow: 2px 2px 0 var(--power-black);">✨ Selamat Datang di QUATTRO BLOOM! ✨</h1>
+            <p style="font-size: 18px; margin-bottom: 20px;">Hai semuanya! Selamat datang di situs resmi kelompok kami. Di sini, kami memadukan imajinasi penuh warna bertema <strong>The Powerpuff Girls</strong> dengan serunya dunia Informatika kelas 10 SMA Negeri 71 Jakarta! 🚀</p>
+            <p>Silakan jelajahi menu di atas untuk membaca panduan permainan atau langsung menantang diri kalian di game tebak kata kami!</p>
+            
+            <div class="canva-wrapper">
+                <iframe loading="lazy" src="https://www.canva.com/design/PLAYHOLDER_ID/view?embed" allowfullscreen="allowfullscreen" allow="fullscreen"></iframe>
+            </div>
+        </div>
+    </main>
 
-  <div class="created">
-    <span>Created by</span>
-    <h2>SMAN 71</h2>
-    <p><a href="about.html">Quattro Bloom Team</a></p>
-  </div>
-
-  <div class="container top-content">
-    <div style="max-width: 400px; color: white; font-family: Montserrat;">
-      <h1 style="font-size: 3rem; color: #ec1cce; text-shadow: 2px 2px #fff; margin-bottom: 10px;">QUATTRO BLOOM</h1>
-      <p>Selamat datang di welcoming page proyek kolaborasi Informatika SMAN 71 Jakarta bertemakan PowerPuff Girls!</p>
-    </div>
-    
-    <div>
-      <iframe src="https://www.canva.com/design/DAF_Contoh/view?embed" width="500" height="350" style="border: none; border-radius:15px; box-shadow: 0 10px 20px rgba(0,0,0,0.3);"></iframe>
-    </div>
-  </div>
+    <script>
+        // Solusi Autoplay Musik setelah interaksi pengguna
+        window.addEventListener('click', () => {
+            const audio = document.getElementById('bgMusic');
+            if(audio.paused) {
+                audio.play().catch(err => console.log("Musik memerlukan interaksi pengguna terlebih dahulu."));
+            }
+        });
+    </script>
 </body>
 </html>
