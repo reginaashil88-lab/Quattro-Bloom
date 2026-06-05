@@ -1,114 +1,297 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
+/* Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&family=Poppins:wght@400;600;800&display=swap');
 
-html {
-  height: 100vh;
+:root {
+    --blossom-pink: #FF94B9;
+    --blossom-dark: #FF4081;
+    --bubbles-blue: #9BD0F5;
+    --buttercup-green: #A3E37B;
+    --power-black: #1E1E1E;
+    --power-white: #FFFFFF;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
 }
 
 body {
-  margin: 0;
-  background: linear-gradient(to top, #134e89, #05131d), url('bg_powerpuff-girls.jpeg') no-repeat center center fixed;
-  background-size: cover;
+    background: url("src/bg_powerpuff-girls.jpg") no-repeat center center fixed;
+    background-size: cover;
+    color: var(--power-black);
+    min-height: 100/vh;
 }
 
-body,
+/* Header & Navigation */
+header {
+    background-color: rgba(255, 255, 255, 0.95);
+    border-bottom: 5px solid var(--power-black);
+    padding: 15px 5%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.logo-container {
+    display: flex;
+    align-items: center;
+    gap: 15px; /* Jarak antara logo dan tulisan QUATTRO BLOOM */
+}
+
+.logo-school {
+    height: 60px; /* Ukuran diperbesar sedikit */
+    width: auto;
+    object-fit: contain;
+    /* Efek garis tebal khas Powerpuff Girls */
+    filter: drop-shadow(2px 2px 0px #000); 
+}
+
+.site-title {
+    font-family: 'Fredoka', sans-serif;
+    font-size: 26px;
+    font-weight: 800;
+    color: var(--blossom-dark);
+    text-shadow: 2px 2px 0px var(--power-black);
+    letter-spacing: 1px;
+}
+
+nav ul {
+    display: flex;
+    list-style: none;
+    gap: 15px;
+}
+
+nav ul li a {
+    text-decoration: none;
+    font-weight: 600;
+    color: var(--power-black);
+    padding: 8px 16px;
+    border: 3px solid var(--power-black);
+    border-radius: 20px;
+    background-color: var(--power-white);
+    transition: all 0.2s ease;
+    box-shadow: 3px 3px 0px var(--power-black);
+}
+
+nav ul li a:hover, nav ul li a.active {
+    background-color: var(--blossom-pink);
+    transform: translate(-2px, -2px);
+    box-shadow: 5px 5px 0px var(--power-black);
+}
+
+/* Main Layout Containers */
 .container {
-  height: 100%;
+    max-width: 1000px;
+    margin: 40px auto;
+    padding: 20px;
 }
 
-/* Container utama membuat konten berjajar ke samping (horizontal) */
-.container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 0 50px;
-  box-sizing: border-box;
-  padding: 20px;
+.card-panel {
+    background: rgba(255, 255, 255, 0.95);
+    border: 4px solid var(--power-black);
+    border-radius: 25px;
+    padding: 30px;
+    box-shadow: 8px 8px 0px var(--power-black);
+    margin-bottom: 30px;
 }
 
-/* Semua elemen langsung di bawah container otomatis melayang */
-.container > * {
-  animation: float 1.5s ease-in-out infinite alternate;
+h1, h2, h3 {
+    font-family: 'Fredoka', sans-serif;
+    margin-bottom: 20px;
 }
 
-@keyframes float {
-  from {
-    transform: translateY(0);
-  }
-  to {
-    transform: translateY(30px);
-  }
+.text-center {
+    text-align: center;
 }
 
-/* Watermark Badge di pojok kanan atas dari referensimu */
-.created {
-  background: 
-    url(https://assets.codepen.io/154065/internal/avatars/users/default.png),
-    linear-gradient(to bottom, #884ced, #ec1cce);
-  background-size: 75px 75px, cover;
-  background-repeat: no-repeat;
-  position: absolute;
-  top: 0;
-  right: 0;
-  width: 250px;
-  height: 75px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding-left: 2em;
-  justify-content: center;
-  z-index: 1000;
-  border-bottom-left-radius: 15px;
-}
-  
-.created span,
-.created h2,
-.created p,
-.created a {
-  font-family: Montserrat, sans-serif;
-  margin: 0;
-}
-  
-.created a,
-.created p,
-.created span {
-  color: #fff;  
-}
-  
-.created h2 {
-  font-weight: 700;
-  transform: translate(0, -4px);   
-}
-  
-.created a {
-  text-decoration-color: rgba(255,255,255,0.4);
-}
-  
-.created a:hover {
-  color: #e6e82a;
+/* Custom Powerpuff Buttons */
+.ppg-btn {
+    font-family: 'Fredoka', sans-serif;
+    font-size: 18px;
+    font-weight: 700;
+    padding: 10px 25px;
+    border: 3px solid var(--power-black);
+    border-radius: 50px;
+    cursor: pointer;
+    box-shadow: 4px 4px 0px var(--power-black);
+    transition: all 0.1s ease;
+    background-color: var(--bubbles-blue);
 }
 
-/* Navigasi simpel agar tidak bertabrakan dengan posisi .created */
-.nav-menu {
-  position: absolute;
-  top: 20px;
-  left: 30px;
-  display: flex;
-  align-items: center;
-  gap: 20px;
-  z-index: 1000;
+.ppg-btn:hover {
+    transform: translate(-2px, -2px);
+    box-shadow: 6px 6px 0px var(--power-black);
 }
 
-.nav-menu img {
-  height: 40px;
+.ppg-btn:active {
+    transform: translate(2px, 2px);
+    box-shadow: 2px 2px 0px var(--power-black);
 }
 
-.nav-menu a {
-  color: white;
-  text-decoration: none;
-  font-family: Montserrat, sans-serif;
-  font-weight: 700;
+/* Canva Embed Styling */
+.canva-wrapper {
+    position: relative;
+    width: 100%;
+    height: 0;
+    padding-top: 56.2500%;
+    box-shadow: 0 2px 8px 0 rgba(63,69,81,0.16);
+    margin-top: 25px;
+    border: 4px solid var(--power-black);
+    border-radius: 15px;
+    overflow: hidden;
 }
 
-.nav-menu a:hover {
-  color: #e6e82a;
+.canva-wrapper iframe {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    border: none;
+    padding: 0;
+    margin: 0;
+}
+
+/* About Page Specific Styles */
+.about-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 25px;
+    margin-bottom: 30px;
+}
+
+.member-card {
+    background: var(--power-white);
+    border: 3px solid var(--power-black);
+    border-radius: 20px;
+    padding: 20px;
+    text-align: center;
+    box-shadow: 5px 5px 0px var(--power-black);
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.member-photo {
+    width: 130px;
+    height: 130px;
+    border-radius: 50%;
+    border: 4px solid var(--power-black);
+    object-fit: cover;
+    margin-bottom: 15px;
+    transition: transform 0.3s ease;
+}
+
+/* Hover effect requested */
+.member-card:hover {
+    transform: scale(1.08);
+    box-shadow: 8px 8px 0px var(--power-black);
+    background-color: var(--buttercup-green);
+}
+
+.member-card:hover .member-photo {
+    transform: scale(1.1);
+}
+
+.member-name {
+    font-weight: 700;
+    font-size: 16px;
+    margin-bottom: 5px;
+}
+
+.member-absent {
+    font-size: 14px;
+    color: #555;
+    font-weight: 600;
+}
+
+.about-desc {
+    font-size: 16px;
+    line-height: 1.6;
+    text-align: justify;
+}
+
+/* Social Media Footer Section */
+.social-footer {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    margin-top: 25px;
+}
+
+.social-icon {
+    width: 50px;
+    height: 50px;
+    border: 3px solid var(--power-black);
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--power-white);
+    box-shadow: 3px 3px 0px var(--power-black);
+    transition: all 0.2s ease;
+}
+
+.social-icon:hover {
+    transform: translateY(-4px);
+    box-shadow: 5px 5px 0px var(--power-black);
+    background-color: var(--blossom-pink);
+}
+
+.social-icon img {
+    width: 24px;
+    height: 24px;
+}
+
+/* Game Styles (Product) */
+.game-box {
+    text-align: center;
+    padding: 20px;
+}
+
+.scrambled-word {
+    font-family: 'Fredoka', sans-serif;
+    font-size: 36px;
+    letter-spacing: 5px;
+    color: var(--blossom-dark);
+    text-shadow: 2px 2px 0px var(--power-black);
+    margin: 20px 0;
+    background: #f0f0f0;
+    padding: 10px;
+    border: 3px dashed var(--power-black);
+    border-radius: 10px;
+    display: inline-block;
+}
+
+.game-input {
+    width: 80%;
+    max-width: 300px;
+    padding: 10px 15px;
+    font-size: 18px;
+    border: 3px solid var(--power-black);
+    border-radius: 10px;
+    outline: none;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+.hint-box {
+    background-color: #fff3cd;
+    border: 2px solid var(--power-black);
+    padding: 10px;
+    border-radius: 10px;
+    margin: 15px auto;
+    max-width: 500px;
+    font-style: italic;
+}
+
+.score-board {
+    display: flex;
+    justify-content: space-around;
+    font-weight: 700;
+    margin-bottom: 20px;
+    font-size: 18px;
 }
