@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>QUATTRO BLOOM - Home</title>
+    <title>QUATTRO BLOOM - Design & Tutorial</title>
     <link rel="icon" type="image/x-icon" href="src/favicon.ico">
     <link rel="stylesheet" href="style.css">
 </head>
@@ -24,24 +24,30 @@
     </header>
 
     <main class="container">
-        <div class="card-panel text-center">
-            <h1 style="font-size: 36px; color: var(--blossom-dark); text-shadow: 2px 2px 0 var(--power-black);">✨ Selamat Datang di QUATTRO BLOOM! ✨</h1>
-            <p style="font-size: 18px; margin-bottom: 20px;">Hai semuanya! Selamat datang di situs resmi kelompok kami. Di sini, kami memadukan imajinasi penuh warna bertema <strong>The Powerpuff Girls</strong> dengan serunya dunia Informatika kelas 10 SMA Negeri 71 Jakarta! 🚀</p>
-            <p>Silakan jelajahi menu di atas untuk membaca panduan permainan atau langsung menantang diri kalian di game tebak kata kami!</p>
+        <div class="card-panel">
+            <h2 class="text-center" style="font-size: 32px; color: #2196F3; text-shadow: 2px 2px 0 #000;">🎮 CARA BERMAIN "BLOOM SCRUMBLE" 🎮</h2>
+            <p class="text-center" style="font-weight: 600; margin-bottom: 25px;">Uji kehebatan otakmu layaknya Profesor Utonium meracik Chemical X!</p>
             
+            <div style="background: #fff; border: 3px solid var(--power-black); padding: 20px; border-radius: 15px; box-shadow: 4px 4px 0 #000; margin-bottom: 20px;">
+                <ol style="padding-left: 20px; line-height: 2;">
+                    <li>Masuk ke halaman <strong>Product</strong> untuk memulai petualangan serumu.</li>
+                    <li>Kamu akan disuguhkan susunan kata acak berantakan bertemakan konsep-konsep keren di bidang <strong>Informatika</strong>.</li>
+                    <li>Merasa kesulitan? Tenang! Ada fitur <strong>Petunjuk (Hint)</strong> misterius di bawah kotak kata yang siap membantumu menebak.</li>
+                    <li>Ketik jawaban benarmu menggunakan huruf kapital/kecil (tidak sensitif) lalu klik tombol <strong>Check!</strong>.</li>
+                    <li>Kumpulkan poin tertinggi dari total 20 kata yang tersedia dan lihat skor akhir kehebatanmu di babak final! ✨</li>
+                </ol>
+            </div>
+
             <div class="canva-wrapper">
-                <iframe loading="lazy" src="https://www.canva.com/design/PLAYHOLDER_ID/view?embed" allowfullscreen="allowfullscreen" allow="fullscreen"></iframe>
+                <iframe loading="lazy" src="https://www.canva.com/design/DAHI29ryl5g/Te3W2GucOihuWUuiarV_eA/view?embed" allowfullscreen="allowfullscreen" allow="fullscreen"></iframe>
             </div>
         </div>
     </main>
 
     <script>
-        // Solusi Autoplay Musik setelah interaksi pengguna
         window.addEventListener('click', () => {
             const audio = document.getElementById('bgMusic');
-            if(audio.paused) {
-                audio.play().catch(err => console.log("Musik memerlukan interaksi pengguna terlebih dahulu."));
-            }
+            if(audio.paused) { audio.play(); }
         });
     </script>
 </body>
